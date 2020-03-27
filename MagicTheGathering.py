@@ -1,3 +1,5 @@
+#! resources: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dropna.html
+
 import numpy 
 import pandas 
 
@@ -17,4 +19,6 @@ dataframe2.dropna()
 dataframe3.dropna()
 
 # testing
-print(dataframe1)
+labels = dataframe1.columns
+print(labels)
+print(dataframe1[['type', 'rarity']])
