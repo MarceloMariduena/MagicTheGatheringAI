@@ -21,4 +21,4 @@ dataframe3.dropna()
 # testing
 labels = dataframe1.columns
 print(labels)
-print(dataframe1[['type', 'rarity']])
+print(dataframe1[['type', 'subtypes', 'rarity']])
