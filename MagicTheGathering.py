@@ -13,12 +13,6 @@ dataframe1 = pandas.DataFrame(dataframe1)
 dataframe2 = pandas.DataFrame(dataframe2)
 dataframe3 = pandas.DataFrame(dataframe3)
 
-# remove rows with missing values
-dataframe1.dropna()
-dataframe2.dropna()
-dataframe3.dropna()
 
-# testing
-labels = dataframe1.columns
-print(labels)
-print(dataframe1[['type', 'subtypes', 'rarity']])
+features = dataframe1[['type', 'subtypes', 'rarity']].dropna()
+print(features)
