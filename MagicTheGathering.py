@@ -20,13 +20,15 @@ print(features)
 
 # TODO: Code
 # 1. Get a dataset
-# 2. Encode features
-# 3. Take user input (Name, Description, Mana cost)
-# 4. Generate the following:
-#       4.1. Effects
-#       4.2. Type
-#       4.3. Health
-#       4.4. Power
+# 2. Process the data (get rid of incomplete rows of data)
+# 3. Encode features
+# 4. Make a classification or prediction model 
+# 5. Take user input (Name, Description, Mana cost)
+# 6. Generate the following for this user:
+#       6.1. Effects
+#       6.2. Type
+#       6.3. Health
+#       6.4. Power
 
 
 # TODO: App
