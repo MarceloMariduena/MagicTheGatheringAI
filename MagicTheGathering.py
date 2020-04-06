@@ -4,9 +4,9 @@ import numpy
 import pandas 
 
 # read the csv file 
-dataframe1 = pandas.read_csv("./secondEdition.csv")
-dataframe2 = pandas.read_csv("./thirdEdition.csv")
-dataframe3 = pandas.read_csv("./fourthEdition.csv")
+dataframe1 = pandas.read_csv("./Datasets/secondEdition.csv")
+dataframe2 = pandas.read_csv("./Datasets/thirdEdition.csv")
+dataframe3 = pandas.read_csv("./Datasets/fourthEdition.csv")
 
 # convert it into a neat table 
 dataframe1 = pandas.DataFrame(dataframe1)
