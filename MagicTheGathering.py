@@ -53,3 +53,17 @@ y = dataframe1[['type', 'power', 'toughness', 'manaCost', 'colorIdentity']].drop
 X = np.array(X)
 y = np.array(y)
 
+
+# SELECTING A MODEL: (options)
+# Random Forest
+# Support Vector Machine
+# K Nearest Neighbors
+# Multinomial Naïve Bayes
+# Multinomial Logistic Regression
+# Gradient Boosting
+
+
+# Professor recommendations:
+#   1. make a dictionary of words
+#   2. match user input with dictionary and output remaining rows
+#   3. (possibly): recommender system with similarities (similarity matrix)
