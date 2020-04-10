@@ -1,18 +1,3 @@
-#! resources: https://pd.pydata.org/pd-docs/stable/reference/api/pd.DataFrame.dropna.html
-
-# TODO: App
-# 1. Allow user to input photo, [ name, text ].
-# 2. Return a MagicTheGathering card with:
-#       2.1. *Animated (MagicTheGathering) photo of the user
-#       2.1. name
-#       2.1. text
-#       2.1. type
-#       2.1. power
-#       2.1. toughness
-#       2.1. manaCost
-#       2.1. colorIdentity
-
-
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
@@ -32,38 +17,15 @@ dataframe3 = pd.DataFrame(dataframe3)
 
 
 # PROVIDED LABELS FROM DATASET: 
-#  [name, manaCost, cmc, colorIdentity, artist, number, type, text, printings, flavor, layout, multiverseid, power, toughness, rarity, subtypes, types]
-
-
-# LABELS TO WORK WITH: !userWillInput *modelOutput
-#   !name, !text, *type, *power, *toughness, *manaCost, *colorIdentity
-
-
-# SELECTING FEATURES 
-features = dataframe1[['name', 'text', 'type', 'power', 'toughness', 'manaCost', 'colorIdentity']].dropna()
-
-
-# SPLIT DATA INTO SETS:
-#   X: inputs
-#   y: outputs
-X = dataframe1[['name', 'text']].dropna() 
-y = dataframe1[['type', 'power', 'toughness', 'manaCost', 'colorIdentity']].dropna() 
-# print(X)
-# print(y)
-X = np.array(X)
-y = np.array(y)
-
-
-# SELECTING A MODEL: (options)
-# Random Forest
-# Support Vector Machine
-# K Nearest Neighbors
-# Multinomial Naïve Bayes
-# Multinomial Logistic Regression
-# Gradient Boosting
-
-
-# Professor recommendations:
-#   1. make a dictionary of words
-#   2. match user input with dictionary and output remaining rows
-#   3. (possibly): recommender system with similarities (similarity matrix)
+    #  [name, manaCost, cmc, colorIdentity, artist, number, type, text, printings, flavor, layout, multiverseid, power, toughness, rarity, subtypes, types]
+# WE WILL SELECT THE FOLLOWING: 
+    # LABEL: EXAMPLE
+    # name: 'Benalish Hero'
+    # text: "Banding (Any creatures with banding, and up to one without, can attack in a band."
+    # type: 'Creature — Human Soldier' 
+    # power: '1' 
+    # toughness:'1' 
+    # manaCost: '{W}' 
+    # colorIdentity: 'W'
+X = dataframe1[['name', 'text', 'type', 'power', 'toughness', 'manaCost', 'colorIdentity']].dropna()#.to_numpy()
+print(X)
