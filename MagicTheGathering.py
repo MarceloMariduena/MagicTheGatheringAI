@@ -1,5 +1,13 @@
-# Read from csv files convert contents into tables.
+import numpy as np
 import pandas as pd
+# Given that descriptions are series of ordered words, we can convert those series into numerical feature vectors
+from sklearn.feature_extraction.text import CountVectorizer
+# Reduce the weightage of certain words like (the, is, a, an, etc) 
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import SGDClassifier
+
+# Read from csv files convert contents into tables.
 dataframe1 = pd.read_csv("./Datasets/secondEdition.csv")
 dataframe2 = pd.read_csv("./Datasets/thirdEdition.csv")
 dataframe3 = pd.read_csv("./Datasets/fourthEdition.csv")
@@ -11,103 +19,72 @@ dataframe3 = pd.DataFrame(dataframe3)
 # Select the categories we will deal with. Ensure rows with missing data are not used.
 X = dataframe1[['text', 'type', 'power', 'toughness', 'manaCost', 'colorIdentity']].dropna().to_numpy()
 card_text = list(X[:,0])
-card_type = list(X[:,1])
-card_power = list(X[:,2])
-card_toughness = list(X[:,3])
-card_mana_cost = list(X[:,4])
-card_color_identity = list(X[:,5])
+card_type = list(X[:,1]) # target1
+card_power = list(X[:,2]) # target2
+card_toughness = list(X[:,3]) # target3
+card_mana_cost = list(X[:,4]) # target4
+card_color_identity = list(X[:,5]) # target5
 
 
-# Train the model, CountVectorizer:
-    # Given that descriptions are series of ordered words, we can convert those series into numerical feature vectors
-from sklearn.feature_extraction.text import CountVectorizer
-count_vect = CountVectorizer()
-X_train_counts = count_vect.fit_transform(card_text)
-X_train_counts.shape
+# Train the models
+text_clf_svm1 = Pipeline([
+    ('vect', CountVectorizer()), 
+    ('tfidf', TfidfTransformer()), 
+    ('clf-svm', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, random_state=42))
+    ,])
+text_clf_svm1 = text_clf_svm1.fit(card_text, card_type)
 
+text_clf_svm2 = Pipeline([
+    ('vect', CountVectorizer()), 
+    ('tfidf', TfidfTransformer()), 
+    ('clf-svm', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, random_state=42))
+    ,])
+text_clf_svm2 = text_clf_svm2.fit(card_text, card_power)
 
-# Reduce the weightage of certain words like (the, is, a, an, etc) 
-    # For this we will use Term Frequency times inverse document frequency (TfidTransformer) to invert the stats and return keywords. 
-from sklearn.feature_extraction.text import TfidfTransformer
-tfidf_transformer = TfidfTransformer()
-X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
-X_train_tfidf.shape
+text_clf_svm3 = Pipeline([
+    ('vect', CountVectorizer()), 
+    ('tfidf', TfidfTransformer()), 
+    ('clf-svm', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, random_state=42))
+    ,])
+text_clf_svm3 = text_clf_svm3.fit(card_text, card_toughness)
 
+text_clf_svm4 = Pipeline([
+    ('vect', CountVectorizer()), 
+    ('tfidf', TfidfTransformer()), 
+    ('clf-svm', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, random_state=42))
+    ,])
+text_clf_svm4 = text_clf_svm4.fit(card_text, card_mana_cost)
 
-# # Encode the targets
-# from sklearn import preprocessing
-# card_type_encoder = preprocessing.LabelEncoder()
-# card_power_encoder = preprocessing.LabelEncoder()
-# card_toughness_encoder = preprocessing.LabelEncoder()
-# card_mana_cost_encoder = preprocessing.LabelEncoder()
-# card_color_identity_encoder = preprocessing.LabelEncoder()
-
-
-# Now we can begin the classification with various targets
-from sklearn.naive_bayes import MultinomialNB
-clf1 = MultinomialNB().fit(X_train_tfidf, card_type)
-clf2 = MultinomialNB().fit(X_train_tfidf, card_power)
-clf3 = MultinomialNB().fit(X_train_tfidf, card_toughness)
-clf4 = MultinomialNB().fit(X_train_tfidf, card_mana_cost)
-clf5 = MultinomialNB().fit(X_train_tfidf, card_color_identity)
+text_clf_svm5 = Pipeline([
+    ('vect', CountVectorizer()), 
+    ('tfidf', TfidfTransformer()), 
+    ('clf-svm', SGDClassifier(loss='hinge', penalty='l2', alpha=1e-3, random_state=42))
+    ,])
+text_clf_svm5 = text_clf_svm5.fit(card_text, card_color_identity)
 
 
 # Test data 
 X2 = dataframe2[['text', 'type', 'power', 'toughness', 'manaCost', 'colorIdentity']].dropna().to_numpy()
 card_text2 = list(X2[:,0])
 card_type2 = list(X2[:,1])
-card_power2 = list(X[:,2])
-card_toughness2 = list(X[:,3])
-card_mana_cost2 = list(X[:,4])
-card_color_identity2 = list(X[:,5])
+card_power2 = list(X2[:,2])
+card_toughness2 = list(X2[:,3])
+card_mana_cost2 = list(X2[:,4])
+card_color_identity2 = list(X2[:,5])
 
 
-# Training another classifier
-from sklearn.pipeline import Pipeline
-text_clf = Pipeline([('vect', CountVectorizer()), ('tfidf', TfidfTransformer()), ('clf', MultinomialNB()),])
-text_clf = text_clf.fit(card_text, card_type)
+# Mean scores
+predicted_svm1 = text_clf_svm1.predict(card_text2)
+print('Type: ', (np.mean(predicted_svm1 == card_type2) * 100), '%')
 
+predicted_svm2 = text_clf_svm2.predict(card_text2)
+print('Power: ', (np.mean(predicted_svm2 == card_power2) * 100), '%')
 
-# Accuracy testing
-import numpy as np
-predicted = text_clf.predict(card_text2)
-print(np.mean(predicted == card_type2))
+predicted_svm3 = text_clf_svm3.predict(card_text2)
+print('Toughness: ', (np.mean(predicted_svm3 == card_toughness2) * 100), '%')
 
+predicted_svm4 = text_clf_svm4.predict(card_text2)
+print('Mana cost: ', (np.mean(predicted_svm4 == card_mana_cost2) * 100), '%')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# # # PROVIDED LABELS FROM DATASET: 
-# #     #  [name, manaCost, cmc, colorIdentity, artist, number, type, text, printings, flavor, layout, multiverseid, power, toughness, rarity, subtypes, types]
-# # # WE WILL SELECT THE FOLLOWING: 
-# #     # LABEL: EXAMPLE
-# #     # name: 'Benalish Hero'
-# #     # text: "Banding (Any creatures with banding, and up to one without, can attack in a band."
-# #     # type: 'Creature — Human Soldier' 
-# #     # power: '1' 
-# #     # toughness:'1
-# #     # manaCost: '{W}' 
-# #     # colorIdentity: 'W'
-# # # categories = dataframe1[['name', 'text', 'type', 'power', 'toughness', 'manaCost', 'colorIdentity']].dropna().to_numpy()
-# # # X = dataframe1[['text']].dropna().to_numpy()
-# # # Z = dataframe1[['text']].dropna()
-# # # print(X)
-# # # print(Z)
-
-
-# # # Given that descriptions are series of ordered words, we can convert those series into numerical feature vectors
-# # # count_vect = CountVectorizer()
-# # # X_train_counts = count_vect.fit_transform(X[0])
+predicted_svm5 = text_clf_svm5.predict(card_text2)
+print('Color identity: ', (np.mean(predicted_svm5 == card_color_identity2) * 100), '%')
