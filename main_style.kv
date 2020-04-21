@@ -3,10 +3,41 @@ WindowManager:
     offlineScreen:
     onlineScreen:
 
+<camera>:
+
+
+    Button:
+        text: "Capture"
+        pos_hint:{"x":.2,"top":.2}
+        size_hint:.6,.2
+
+<userInput>:
+
+    cols:1
+
+    GridLayout:
+        cols:2
+        Label:
+            text:"Card Name"
+
+        TextInput:
+            id:cardName
+            multiline:False
+
+        Label:
+            text:"Card Description"
+
+        TextInput:
+            id:cardDesc
+            multiline:True
+
+    Button:
+        text:"Confirm"
+
 
 
 <MainWindow>:
-
+    name:"main"
     FloatLayout:
 
         Label:
@@ -22,6 +53,130 @@ WindowManager:
 
         Button:
             id:onlineButton
-            text: "Online Mode" if onlineButton.state == "normal" else "Turn on Runway"
-            size_hint:.4,.15
+            text: "Online Mode"
+            size_hint:.45,.15
             pos_hint:{"x":.3,"top":.6}
+            on_release:
+                root.manager.transition.direction="left"
+                app.root.current = "online"
+
+        Button:
+            id:offlineButton
+            text: "Offline Mode"
+            size_hint:.45,.15
+            pos_hint:{"x":.3,"top":.4}
+            on_release:
+                root.manager.transition.direction="left"
+                app.root.current = "offline"
+
+
+<onlineScreen>:
+    name:"online"
+
+    FloatLayout:
+
+
+
+        Button:
+            text:"Back"
+            size_hint: .07,.07
+            pos_hint: {"x":0,"top":1}
+            on_release:
+                root.manager.transition.direction="right"
+                app.root.current = "main"
+
+
+        Label:
+            text: "First please input the http ip addresses from runway"
+            pos_hint:{"x":.2,"top":1.0}
+            size_hint:.6,.2
+
+
+        Button:
+            id:cameraButton
+            text: "Image Capture"
+            size_hint: .2,.2
+            pos_hint: {"x":.2,"top":.8}
+            on_release:
+                cameraButton.background_color= 1,.6,0,1
+                root.cameraPop()
+
+
+        Button:
+            id:userButton
+            text:"User Input"
+            size_hint: .2,.2
+            pos_hint: {"x":.6,"top":.8}
+            on_release:
+                userButton.background_color=1,.6,0,1
+                root.userInp()
+
+
+
+
+
+
+
+        Label:
+            text:"Receiving IP"
+            pos_hint:{"x":0,"top":.5}
+            size_hint:.6,.2
+
+
+        Label:
+            text:"Sending IP"
+            pos_hint:{"x":0,"top":.6}
+            size_hint:.6,.2
+
+
+
+        TextInput:
+            id:ipIn
+            multiline: False
+            pos_hint:{"x":.4,"top":.53}
+            size_hint:.4,.06
+
+
+        TextInput:
+            id:ipOut
+            multiline: False
+            pos_hint:{"x":.4,"top":.43}
+            size_hint:.4,.06
+
+
+
+
+<offlineScreen>:
+    name:"offline"
+    FloatLayout:
+
+
+        Button:
+            text:"Back"
+            size_hint: .07,.07
+            pos_hint: {"x":0,"top":1}
+            on_release:
+                root.manager.transition.direction="right"
+                app.root.current = "main"
+
+
+        Button:
+            id:cameraButton
+            text: "Image Capture"
+            size_hint: .2,.2
+            pos_hint: {"x":.2,"top":.8}
+            on_release:
+                cameraButton.background_color= 1,.6,0,1
+                root.cameraPop()
+
+
+        Button:
+            id:userButton
+            text:"User Input"
+            size_hint: .2,.2
+            pos_hint: {"x":.6,"top":.8}
+            on_release:
+                userButton.background_color=1,.6,0,1
+                root.userInp()
+
+
