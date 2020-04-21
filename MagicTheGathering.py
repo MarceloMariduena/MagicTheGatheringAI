@@ -6,6 +6,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import SGDClassifier
+import pickle
 
 # Read from csv files convert contents into tables.
 dataframe1 = pd.read_csv("./Datasets/secondEdition.csv")
@@ -99,5 +100,26 @@ userPower = list(text_clf_svm2.predict(userDescription))
 userToughness = list(text_clf_svm3.predict(userDescription))
 userMana = list(text_clf_svm4.predict(userDescription))
 userColor = list(text_clf_svm5.predict(userDescription))
+
+#model generation
+with open('type_model.obj','wb') as f:
+    pickle.dump(text_clf_svm1,f)
+
+with open('power_model.obj','wb') as f:
+    pickle.dump(text_clf_svm2,f)
+
+with open('tough_model.obj','wb') as f:
+    pickle.dump(text_clf_svm3,f)
+
+with open('mana_model.obj','wb') as f:
+    pickle.dump(text_clf_svm4,f)
+
+with open('color_model.obj','wb') as f:
+    pickle.dump(text_clf_svm5,f)
+
+
+
+
+
 
 print('\nWell then young warrior! You are a %s %s of with a power level of %s, a tougness of %s, and a mana cost of %s.' % (userColor[0], userType[0], userPower[0], userToughness[0], userMana[0]))

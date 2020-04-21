@@ -11,14 +11,28 @@ from kivy.uix.popup import Popup
 
 # imports for ML Software here
 
-
-
-
-
-
+import pandas as pd
+# Given that descriptions are series of ordered words, we can convert those series into numerical feature vectors
+from sklearn.feature_extraction.text import CountVectorizer
+# Reduce the weightage of certain words like (the, is, a, an, etc)
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import SGDClassifier
+from pickle import *
 
 
 #end of imports
+#Ml Class and organization
+
+class model():
+    def __init__(self,name,description):
+
+
+
+
+
+
+
 
 
 class WindowManager(ScreenManager):
