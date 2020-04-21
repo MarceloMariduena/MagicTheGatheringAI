@@ -74,17 +74,30 @@ card_color_identity2 = list(X2[:,5])
 
 
 # Mean scores
-predicted_svm1 = text_clf_svm1.predict(card_text2)
-print('Type: ', (np.mean(predicted_svm1 == card_type2) * 100), '%')
+# predicted_svm1 = text_clf_svm1.predict(card_text2)
+# print('Type: ', (np.mean(predicted_svm1 == card_type2) * 100), '%')
 
-predicted_svm2 = text_clf_svm2.predict(card_text2)
-print('Power: ', (np.mean(predicted_svm2 == card_power2) * 100), '%')
+# predicted_svm2 = text_clf_svm2.predict(card_text2)
+# print('Power: ', (np.mean(predicted_svm2 == card_power2) * 100), '%')
 
-predicted_svm3 = text_clf_svm3.predict(card_text2)
-print('Toughness: ', (np.mean(predicted_svm3 == card_toughness2) * 100), '%')
+# predicted_svm3 = text_clf_svm3.predict(card_text2)
+# print('Toughness: ', (np.mean(predicted_svm3 == card_toughness2) * 100), '%')
 
-predicted_svm4 = text_clf_svm4.predict(card_text2)
-print('Mana cost: ', (np.mean(predicted_svm4 == card_mana_cost2) * 100), '%')
+# predicted_svm4 = text_clf_svm4.predict(card_text2)
+# print('Mana cost: ', (np.mean(predicted_svm4 == card_mana_cost2) * 100), '%')
 
-predicted_svm5 = text_clf_svm5.predict(card_text2)
-print('Color identity: ', (np.mean(predicted_svm5 == card_color_identity2) * 100), '%')
+# predicted_svm5 = text_clf_svm5.predict(card_text2)
+# print('Color identity: ', (np.mean(predicted_svm5 == card_color_identity2) * 100), '%')
+
+
+# User 
+userName = input("Enter your name:\n>>")
+userDescription = list(input("Tell me about yourself, big boy/girl:\n>>"))
+
+userType = list(text_clf_svm1.predict(userDescription))
+userPower = list(text_clf_svm2.predict(userDescription))
+userToughness = list(text_clf_svm3.predict(userDescription))
+userMana = list(text_clf_svm4.predict(userDescription))
+userColor = list(text_clf_svm5.predict(userDescription))
+
+print('\nWell then young warrior! You are a %s %s of with a power level of %s, a tougness of %s, and a mana cost of %s.' % (userColor[0], userType[0], userPower[0], userToughness[0], userMana[0]))
