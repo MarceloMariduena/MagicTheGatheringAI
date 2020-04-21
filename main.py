@@ -18,17 +18,24 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import SGDClassifier
-from pickle import *
+import pickle
 
 
 #end of imports
 #Ml Class and organization
 
 class model():
-    def __init__(self,name,description):
-
-
-
+    def __init__(self):
+        self.modelList =[]  #contains models in this order [type,power,toughness,mana-cost,color]
+        filelist=['type_model.obj','power_model.obj','tough_model.obj','mana_model.obj','color_model.obj']
+        for x in filelist:
+            with open(x,'rb') as f:
+                self.modelList.append(pickle.load(f))
+    def prediction(self,X):
+        outputList = []
+        for piece in self.modelList:
+            outputList.append(piece.predict(X))
+            return outputList
 
 
 
@@ -56,6 +63,7 @@ class offlineScreen(Screen):
         self.ui = userInput()
         self.popupUi = Popup(title="User Query", content=self.ui, size_hint=(None, None), size=(400, 400))
         self.popupCamera = Popup(title="Camera", content=self.cam, size_hint=(None, None), size=(400, 400))
+        self.ml= model()
         super(Screen,self).__init__(**kwargs)
 
     def cameraPop(self):
@@ -67,7 +75,7 @@ class offlineScreen(Screen):
         self.popupUi.open()
 
     def offRun(self):
-        pass
+        print(self.ml.prediction(self.ui.cardDesc.text))
 
 
 
