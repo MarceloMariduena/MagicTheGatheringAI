@@ -81,6 +81,12 @@ text_clf_svm = Pipeline([
 text_clf_svm = text_clf_svm.fit(card_text, card_type)
 
 
+
+
+
+
+
+
 # Accuracy testing
 import numpy as np
 predicted = text_clf.predict(card_text2)
@@ -89,3 +95,4 @@ print(np.mean(predicted == card_type2))
 predicted_svm = text_clf_svm.predict(card_text2)
 print(np.mean(predicted_svm == card_type2))
 
+print(card_type)

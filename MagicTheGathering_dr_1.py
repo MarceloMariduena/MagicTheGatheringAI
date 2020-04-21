@@ -64,12 +64,12 @@ for row in X[1:,1]:
     for x in row:
         if(x ==" "):
            # print(x+ "IS THE LAST CHAR OF : "+holder)
-            textEncoder.fit_transform([holder])
+            textEncoder.fit([holder])
             lister.append(holder)
             holder = ""
         else:
             holder=holder+x 
-    X[iteration,1] = lister
+    X[iteration,1] = textEncoder.fit_transform(lister) 
    # print(X[iteration,1]) 
     iteration=iteration+1
        
@@ -77,6 +77,7 @@ print(X[:,1])
 
 
 
+  
 
 
 
