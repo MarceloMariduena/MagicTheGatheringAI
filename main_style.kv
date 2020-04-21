@@ -3,6 +3,9 @@ WindowManager:
     offlineScreen:
     onlineScreen:
 
+
+
+
 <camera>:
 
 
@@ -12,6 +15,10 @@ WindowManager:
         size_hint:.6,.2
 
 <userInput>:
+
+    cardName:cardName
+    cardDesc:cardDesc
+
 
     cols:1
 
@@ -78,6 +85,7 @@ WindowManager:
 
 
         Button:
+
             text:"Back"
             size_hint: .07,.07
             pos_hint: {"x":0,"top":1}
@@ -93,23 +101,29 @@ WindowManager:
 
 
         Button:
-            id:cameraButton
+            id:onlCameraButton
             text: "Image Capture"
             size_hint: .2,.2
             pos_hint: {"x":.2,"top":.8}
             on_release:
-                cameraButton.background_color= 1,.6,0,1
-                root.cameraPop()
+                onlCameraButton.background_color= 1,0,0,.8
+                if ipIn.text != "" and ipOut.text != "": \
+                onlCameraButton.background_color = 0,1,1,.9; \
+                root.show_popup();
+
 
 
         Button:
-            id:userButton
+            id:onlUserButton
             text:"User Input"
             size_hint: .2,.2
             pos_hint: {"x":.6,"top":.8}
             on_release:
-                userButton.background_color=1,.6,0,1
-                root.userInp()
+                onlUserButton.background_color=1,0,0,.8
+                if ipIn.text != "" and ipOut.text != "": \
+                onlUserButton.background_color=0,1,1,.9; \
+                root.userInp();
+
 
 
 
@@ -180,3 +194,10 @@ WindowManager:
                 root.userInp()
 
 
+        Button:
+            id:offSubmit
+            text:"Submit and Run"
+            size_hint:.2,.2
+            pos_hint:{"x":.4,"top":.2}
+            on_release:
+                root.offRun()

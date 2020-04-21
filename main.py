@@ -31,33 +31,34 @@ class MainWindow(Screen,FloatLayout):
 class camera(FloatLayout):
     pass
 
-class userInput(GridLayout):
+class userInput(GridLayout,Widget):
+    cardName = ObjectProperty(None)
+    cardDesc = ObjectProperty(None)
     pass
 
 class offlineScreen(Screen):
+    def __init__(self,**kwargs):
+        self.cam = camera()
+        self.ui = userInput()
+        self.popupUi = Popup(title="User Query", content=self.ui, size_hint=(None, None), size=(400, 400))
+        self.popupCamera = Popup(title="Camera", content=self.cam, size_hint=(None, None), size=(400, 400))
+        super(Screen,self).__init__(**kwargs)
+
     def cameraPop(self):
-        self.show_popup()
+        self.popupCamera.open()
 
-    def show_popup(self):
-        show = camera()
-
-        self.popupWindow = Popup(title="Camera", content=show, size_hint=(None, None), size=(400, 400))
-        self.popupWindow.open()
 
     def userInp(self):
-        show = userInput()
 
-        self.popupWindow = Popup(title="User Query", content=show, size_hint=(None, None), size=(400, 400))
-        self.popupWindow.open()
+        self.popupUi.open()
 
-    #def Pushed(self):
-     #   self.popupWindow.dismiss()
+    def offRun(self):
+        pass
 
 
 
 class onlineScreen(Screen):
-    def cameraPop(self):
-        self.show_popup()
+
 
     def show_popup(self):
         show = camera()
@@ -70,6 +71,17 @@ class onlineScreen(Screen):
 
         self.popupWindow = Popup(title="User Query", content=show, size_hint=(None, None), size=(400, 400))
         self.popupWindow.open()
+
+
+    #ML Code for online
+
+    def onlRun(self):
+        pass
+
+
+
+
+
 
 
 #Kivy App Builder
