@@ -8,7 +8,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.popup import Popup
 
-# imports for ML Software
+# imports for ML Software here
 
 
 
@@ -21,7 +21,7 @@ class WindowManager(ScreenManager):
     pass
 
 
-class MainWindow(Screen):
+class MainWindow(Screen,FloatLayout):
     pass
 
 

@@ -4,6 +4,24 @@ WindowManager:
     onlineScreen:
 
 
-MainWindow:
+
+<MainWindow>:
+
+    FloatLayout:
+
+        Label:
+            text: "Welcome to the MTG Card Generator!"
+            size_hint: .6,.2
+            pos_hint: {"x":.2,"top":1}
+
+        Label:
+            text: "AI project @ GGC"
+            size_hint:.6,.2
+            pos_hint:{"x":.2,"top":.9}
 
 
+        Button:
+            id:onlineButton
+            text: "Online Mode" if onlineButton.state == "normal" else "Turn on Runway"
+            size_hint:.4,.15
+            pos_hint:{"x":.3,"top":.6}
