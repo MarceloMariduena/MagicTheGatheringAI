@@ -8,7 +8,8 @@ from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.popup import Popup
-
+from threading import Thread
+import time 
 # imports for ML Software here
 
 import pandas as pd
@@ -41,7 +42,8 @@ class model():
 
 
 
-
+class loadPop(FloatLayout):
+    pass
 
 
 class WindowManager(ScreenManager):
@@ -77,8 +79,18 @@ class offlineScreen(Screen):
         self.popupUi.open()
 
     def offRun(self):
-        for x in self.ml.prediction(self.ui.cardDesc.text):
-            print(x)
+        loader = loadPop()
+        loadingScreen = Popup(title="Modeling",content=loader,size_hint=(None,None),size=(400,400))
+        loadingScreen.open()
+
+        #self.threader = Thread(self.ml.prediction,self.ui.cardDesc.text)
+        #solution = self.threader.join()
+
+        solution = self.ml.prediction(self.ui.cardDesc.text)
+
+        print(solution)
+
+
 
 
 
