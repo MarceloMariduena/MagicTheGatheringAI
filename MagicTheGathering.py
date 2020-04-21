@@ -101,6 +101,7 @@ userToughness = list(text_clf_svm3.predict(userDescription))
 userMana = list(text_clf_svm4.predict(userDescription))
 userColor = list(text_clf_svm5.predict(userDescription))
 
+'''
 #model generation
 with open('type_model.obj','wb') as f:
     pickle.dump(text_clf_svm1,f)
@@ -116,7 +117,7 @@ with open('mana_model.obj','wb') as f:
 
 with open('color_model.obj','wb') as f:
     pickle.dump(text_clf_svm5,f)
-
+'''
 
 
 

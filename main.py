@@ -33,9 +33,11 @@ class model():
                 self.modelList.append(pickle.load(f))
     def prediction(self,X):
         outputList = []
+       # print(self.modelList)
         for piece in self.modelList:
-            outputList.append(piece.predict(X))
-            return outputList
+
+            outputList.append(piece.predict([X])[0])
+        return outputList
 
 
 
@@ -75,7 +77,8 @@ class offlineScreen(Screen):
         self.popupUi.open()
 
     def offRun(self):
-        print(self.ml.prediction(self.ui.cardDesc.text))
+        for x in self.ml.prediction(self.ui.cardDesc.text):
+            print(x)
 
 
 
