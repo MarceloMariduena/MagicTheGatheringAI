@@ -20,6 +20,10 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import SGDClassifier
 import pickle
+from kivy.config import Config
+
+Config.set('graphics','resizable',True)
+
 
 
 #end of imports
@@ -87,6 +91,8 @@ class offlineScreen(Screen):
         #solution = self.threader.join()
 
         solution = self.ml.prediction(self.ui.cardDesc.text)
+
+
 
         print(solution)
 
