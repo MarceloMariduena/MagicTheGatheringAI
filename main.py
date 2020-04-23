@@ -54,6 +54,11 @@ class WindowManager(ScreenManager):
     pass
 
 
+    man = ObjectProperty(None)
+
+    pass
+
+
 class MainWindow(Screen,FloatLayout):
     pass
 
@@ -97,7 +102,7 @@ class offlineScreen(Screen):
         print(solution)
 
         loadingScreen.dismiss()
-        theApp.root.current = "card"
+
 
 
 
@@ -105,9 +110,10 @@ class offlineScreen(Screen):
 
 
 class cardScreen(Screen):
-    def __init__(self,solution,**kwargs):
-        self.solution = solution
-        super(Screen, self).__init__(**kwargs)
+    def __init__(self,**kwargs):
+        self.solution = []
+        super(Screen,self).__init__(**kwargs)
+
 
 
 
@@ -149,6 +155,7 @@ class onlineScreen(Screen):
 kv = Builder.load_file("main_style.kv")
 
 class theApp(App):
+
     def build(self):
         return kv
 
