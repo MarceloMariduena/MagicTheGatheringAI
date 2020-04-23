@@ -96,6 +96,23 @@ class offlineScreen(Screen):
 
         print(solution)
 
+        loadingScreen.dismiss()
+        theApp.root.current = "card"
+
+
+
+
+
+
+class cardScreen(Screen):
+    def __init__(self,solution,**kwargs):
+        self.solution = solution
+        super(Screen, self).__init__(**kwargs)
+
+
+
+
+
 
 
 
