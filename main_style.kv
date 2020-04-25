@@ -214,11 +214,23 @@ WindowManager:
     FloatLayout:
 
         Image:
+            id:mainCard
             source: "assets/blue_card.jpg"
             size_hint: .5,.8
-            pos_hint: {"x":.2,"top":.8}
+            pos_hint: {"x":.27,"top":.95}
 
+        Label:
+            text : "x pos : " + str(mainCard.x) + "  y pos : " + str(mainCard.y)
+            pos_hint:{"x":.12,"top":1.48}
 
+        Label:
+
+            text_size: mainCard.width/6,None
+            shorten: True
+            size: self.texture_size
+            color: 1,0,1,1
+            text:"type"
+            pos_hint:{"x":.12,"top":.73}
 
 
 
