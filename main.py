@@ -68,12 +68,14 @@ class camera(FloatLayout):
 class userInput(GridLayout,Widget):
     cardName = ObjectProperty(None)
     cardDesc = ObjectProperty(None)
+
     pass
 
 class offlineScreen(Screen):
     def __init__(self,**kwargs):
         self.cam = camera()
         self.ui = userInput()
+        offSubmit = ObjectProperty(None)
         self.popupUi = Popup(title="User Query", content=self.ui, size_hint=(None, None), size=(400, 400))
         self.popupCamera = Popup(title="Camera", content=self.cam, size_hint=(None, None), size=(400, 400))
         self.ml= model()
@@ -94,17 +96,16 @@ class offlineScreen(Screen):
 
         #self.threader = Thread(self.ml.prediction,self.ui.cardDesc.text)
         #solution = self.threader.join()
-
+        print(self.ui.cardDesc.text)
         solution = self.ml.prediction(self.ui.cardDesc.text)
-
-
 
         print(solution)
 
         loadingScreen.dismiss()
+        self.offSubmit.text="View Output"
 
-
-
+        newPage = cardScreen()
+        newPage.generate(solution)
 
 
 
@@ -115,13 +116,15 @@ class cardScreen(Screen):
         super(Screen,self).__init__(**kwargs)
 
 
+    def generate(self,solve):
+        self.solution = solve
 
 
 
 
 
 
-
+#non functional ( needs runway implementation)
 
 class onlineScreen(Screen):
 
