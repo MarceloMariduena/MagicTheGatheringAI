@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import json
 # Given that descriptions are series of ordered words, we can convert those series into numerical feature vectors
 from sklearn.feature_extraction.text import CountVectorizer
 # Reduce the weightage of certain words like (the, is, a, an, etc) 
@@ -19,6 +20,13 @@ dataframe3 = pd.DataFrame(dataframe3)
 
 # Select the categories we will deal with. Ensure rows with missing data are not used.
 X = dataframe1[['text', 'type', 'power', 'toughness', 'manaCost', 'colorIdentity']].dropna().to_numpy()
+
+# Futher filtering: drop rows with less than 10 words. 
+raw_X1 = dataframe1[['text', 'type', 'power', 'toughness', 'manaCost', 'colorIdentity']].dropna().to_numpy()
+raw_X2 = dataframe3[['text', 'type', 'power', 'toughness', 'manaCost', 'colorIdentity']].dropna().to_numpy()
+X = np.concatenate((raw_X1, raw_X2), axis=0)
+
+
 card_text = list(X[:,0])
 card_type = list(X[:,1]) # target1
 card_power = list(X[:,2]) # target2
@@ -74,7 +82,7 @@ card_mana_cost2 = list(X2[:,4])
 card_color_identity2 = list(X2[:,5])
 
 
-# Mean scores
+## Accuracy testing: Mean scores
 # predicted_svm1 = text_clf_svm1.predict(card_text2)
 # print('Type: ', (np.mean(predicted_svm1 == card_type2) * 100), '%')
 
@@ -101,6 +109,7 @@ userToughness = list(text_clf_svm3.predict(userDescription))
 userMana = list(text_clf_svm4.predict(userDescription))
 userColor = list(text_clf_svm5.predict(userDescription))
 
+
 '''
 #model generation
 with open('type_model.obj','wb') as f:
@@ -120,7 +129,21 @@ with open('color_model.obj','wb') as f:
 '''
 
 
-
-
-
 print('\nWell then young warrior! You are a %s %s of with a power level of %s, a tougness of %s, and a mana cost of %s.' % (userColor[0], userType[0], userPower[0], userToughness[0], userMana[0]))
+
+user_results = {
+    "color": userColor[0], 
+    "type": userType[0], 
+    "power": userPower[0], 
+    "toughness": userToughness[0], 
+    "mana": userMana[0]
+}
+
+# Format output to JSON file
+with open('userStats.json', 'w') as f:
+    json.dump(user_results, f, ensure_ascii=False, indent=4)
+
+# TODO: 
+# * increase accuracy of model (DONE)
+# * format output into JSON file (DONE)
+# * look into running runway over the web
