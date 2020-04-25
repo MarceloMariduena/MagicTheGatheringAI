@@ -1,0 +1,7 @@
+{
+    "color": "B",
+    "type": "Creature — Zombie",
+    "power": "2",
+    "toughness": "1",
+    "mana": "{3}{G}"
+}
