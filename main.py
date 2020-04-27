@@ -4,10 +4,12 @@ from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.relativelayout import RelativeLayout
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.popup import Popup
+import json
 from threading import Thread
 import time 
 # imports for ML Software here
@@ -104,6 +106,40 @@ class offlineScreen(Screen):
         loadingScreen.dismiss()
         self.offSubmit.text="View Output"
 
+        manaCost = 0
+        for x in solution[3]:
+            if(x != "{" and x !="}"):
+                manaCost=manaCost+1
+
+        cardDets = {
+            "cards":{
+            "artist":"Grizzly",
+            "borderColor":"black",
+            "colorIdentity":solution[-1],
+            "colorIndicator":solution[-1],   #to be changed
+            "colors":solution[-1],
+            "convertedManaCost":manaCost,
+            "faceConvertedManaCost":manaCost,
+            "flavorText":self.ui.cardDesc.text},
+            "foreignData":"English",
+            "frameEffects":{"draft"},
+            "frameVersion":"future",
+            "isMtgo":"false",
+            "life":solution[2],
+            "manaCost":solution[-2],
+            "mcmId":"314312",
+            "mcmMetaId":"468313",
+            "name":self.ui.cardName.text,
+            "number":"042",
+            "originalText":self.ui.cardDesc.text,
+            "originalType":solution[0],
+            "power":solution[1],
+            "rarity":"basic"
+
+        }
+
+        
+
         newPage = cardScreen()
         newPage.generate(solution)
 
@@ -118,6 +154,12 @@ class cardScreen(Screen):
 
     def generate(self,solve):
         self.solution = solve
+
+
+
+
+
+
 
 
 

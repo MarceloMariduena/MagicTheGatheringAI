@@ -219,18 +219,21 @@ WindowManager:
             size_hint: .5,.8
             pos_hint: {"x":.27,"top":.95}
 
+
+
         Label:
             text : "x pos : " + str(mainCard.x) + "  y pos : " + str(mainCard.y)
             pos_hint:{"x":.12,"top":1.48}
 
         Label:
-
+            pos_hint:{"left":.8,"y":.3}
+            font_size:12-(11*(self.height/mainCard.height))
             text_size: mainCard.width/6,None
             shorten: True
             size: self.texture_size
             color: 1,0,1,1
             text:"type"
-            pos_hint:{"x":.12,"top":.73}
+
 
 
 
