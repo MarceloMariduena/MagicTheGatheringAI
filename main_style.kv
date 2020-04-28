@@ -13,6 +13,9 @@ WindowManager:
 <camera>:
 
 
+
+
+
     Button:
         text: "Capture"
         pos_hint:{"x":.2,"top":.2}
@@ -225,20 +228,31 @@ WindowManager:
             text : "x pos : " + str(mainCard.x) + "  y pos : " + str(mainCard.y)
             pos_hint:{"x":.12,"top":1.48}
 
+
+
         Label:
-            pos_hint:{"left":.8,"y":.3}
-            font_size:12-(11*(self.height/mainCard.height))
-            text_size: mainCard.width/6,None
-            shorten: True
-            size: self.texture_size
+            id:typeLabel
+            pos_hint:{"x":.31,"y":.092}
+            size_hint:.12,.78
             color: 1,0,1,1
             text:"type"
 
+        Label:
+            id:nameLabel
+            pos_hint:{"x":.31,"y":.498}
+            size_hint:.12,.78
+            color: 1,0,1,1
+            text:"name"
 
-
-
-
-
+        Label:
+            id:descLabel
+            pos_hint:{"x":.36,"y":-.065}
+            text_size:self.size
+            size_hint:.29,.5
+            color:1,0,1,1
+            text:"description holder this is a \ndescription text holder description description"
+            halign:"left"
+            valign:"top"
 
 
 
