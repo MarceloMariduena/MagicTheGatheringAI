@@ -2,7 +2,8 @@ WindowManager:
     MainWindow:
     offlineScreen:
     onlineScreen:
-    cardScreen
+    cardScreen:
+
 
 
 <loadPop>:
@@ -166,8 +167,18 @@ WindowManager:
 
 
 
+<typeManager>:
+    name:"typeMan"
+    typeMan:typeMan
+    id:typeMan
+    offScreen:offScreen
+    resScreen:resScreen
+
+
 
 <offlineScreen>:
+    typeMan:typeMan
+    id:offScreen
     name:"offline"
     offSubmit:offSubmit
     FloatLayout:
@@ -208,12 +219,16 @@ WindowManager:
             size_hint:.2,.2
             pos_hint:{"x":.4,"top":.2}
             on_release:
-                if offSubmit.text == "Submit and Run": root.offRun()
+                if offSubmit.text == "Submit and Run": app.typeMan.generate()
                 else: app.root.current = "card"
 
 
 <cardScreen>:
+    id:resScreen
     name:"card"
+    nameLabel:nameLabel
+    descLabel:descLabel
+    typeLabel:typeLabel
     FloatLayout:
 
         Image:

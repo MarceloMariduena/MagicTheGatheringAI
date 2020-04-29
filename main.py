@@ -81,6 +81,7 @@ class offlineScreen(Screen):
         self.popupUi = Popup(title="User Query", content=self.ui, size_hint=(None, None), size=(400, 400))
         self.popupCamera = Popup(title="Camera", content=self.cam, size_hint=(None, None), size=(400, 400))
         self.ml= model()
+        self.solution = []
         super(Screen,self).__init__(**kwargs)
 
     def cameraPop(self):
@@ -96,6 +97,7 @@ class offlineScreen(Screen):
         loadingScreen = Popup(title="Modeling",content=loader,size_hint=(None,None),size=(400,400))
         loadingScreen.open()
 
+
         #self.threader = Thread(self.ml.prediction,self.ui.cardDesc.text)
         #solution = self.threader.join()
         print(self.ui.cardDesc.text)
@@ -110,6 +112,10 @@ class offlineScreen(Screen):
         for x in solution[3]:
             if(x != "{" and x !="}"):
                 manaCost=manaCost+1
+
+        solution.append(manaCost)
+        self.solution = solution
+
 
         cardDets = {
             "cards":{
@@ -140,20 +146,45 @@ class offlineScreen(Screen):
 
         
 
-        newPage = cardScreen()
-        newPage.generate(solution)
+
 
 
 
 
 class cardScreen(Screen):
     def __init__(self,**kwargs):
-        self.solution = []
         super(Screen,self).__init__(**kwargs)
+        descLabel = ObjectProperty(None)
+        nameLabel = ObjectProperty(None)
+        typeLabel = ObjectProperty(None)
 
 
-    def generate(self,solve):
-        self.solution = solve
+
+class typeManager(Screen):
+
+    def __init__(self,**kwargs):
+        super(Screen,self).__init()
+        resScreen = ObjectProperty(None)
+        offScreen = ObjectProperty(None)
+
+    def generate(self):
+        self.offScreen.offRun()
+
+        self.resScreen.descLabel.text = self.offScreen.ui.cardDesc.text
+        self.resScreen.nameLabel.text = self.offScreen.ui.cardName.text
+        self.resScreen.typeLabel.text = self.offScreen.solution[0]
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
