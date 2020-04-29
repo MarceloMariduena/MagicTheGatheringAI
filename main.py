@@ -9,9 +9,10 @@ from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.popup import Popup
+from kivy.uix.camera import Camera
 import json
 from threading import Thread
-import time 
+import time
 # imports for ML Software here
 
 import pandas as pd
@@ -64,8 +65,14 @@ class WindowManager(ScreenManager):
 class MainWindow(Screen,FloatLayout):
     pass
 
-class camera(FloatLayout):
-    pass
+class camera(Screen):
+
+    camRa = ObjectProperty(None)
+
+
+    def capture(self):
+        self.camRa.export_to_png("kivyImage.png")
+        print("image captured")
 
 class userInput(GridLayout,Widget):
     cardName = ObjectProperty(None)
@@ -75,14 +82,13 @@ class userInput(GridLayout,Widget):
 
 class offlineScreen(Screen):
     def __init__(self,**kwargs):
-        self.cam = camera()
+
         self.ui = userInput()
         offSubmit = ObjectProperty(None)
         self.popupUi = Popup(title="User Query", content=self.ui, size_hint=(None, None), size=(400, 400))
-        self.popupCamera = Popup(title="Camera", content=self.cam, size_hint=(None, None), size=(400, 400))
         self.ml= model()
         self.solution = []
-        super(Screen,self).__init__(**kwargs)
+        super(Screen, self).__init__(**kwargs)
 
     def cameraPop(self):
         self.popupCamera.open()
@@ -159,7 +165,7 @@ class cardScreen(Screen):
         descLabel = ObjectProperty(None)
         nameLabel = ObjectProperty(None)
         typeLabel = ObjectProperty(None)
-
+        statLabel = ObjectProperty(None)
 
 
 class typeManager():
@@ -174,7 +180,7 @@ class typeManager():
         self.resScreen.descLabel.text = self.offScreen.ui.cardDesc.text
         self.resScreen.nameLabel.text = self.offScreen.ui.cardName.text
         self.resScreen.typeLabel.text = self.offScreen.solution[0]
-
+        self.resScreen.statLabel.text = self.offScreen.solution[1] + " / " + self.offScreen.solution[2]
 
 
 
