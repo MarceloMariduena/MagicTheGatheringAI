@@ -32,7 +32,8 @@ WindowManager:
             text: "Capture"
             on_release:
                 camRa.play = False;\
-                root.capture();
+                root.capture();\
+                app.root.current="offline"
 
 
 <userInput>:
@@ -242,6 +243,10 @@ WindowManager:
     statLabel:statLabel
     FloatLayout:
 
+
+
+
+
         Image:
             id:mainCard
             source: "assets/blue_card.jpg"
@@ -251,9 +256,9 @@ WindowManager:
         Image:
             id:picture
             source: "kivyImage.png"
-            size_hint:.3,.3
-            pos_hint:{"x":.5,"y":.6}
-
+            size_hint:.5,.8
+            pos_hint:{"x":.26,"top":1.1299}
+            allowStretch:True
 
 
 

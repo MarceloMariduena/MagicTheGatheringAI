@@ -65,9 +65,12 @@ class WindowManager(ScreenManager):
 class MainWindow(Screen,FloatLayout):
     pass
 
-class camera(Screen):
+class cameraScreen(Screen):
+    def __init__(self,**kwargs):
 
-    camRa = ObjectProperty(None)
+        super(Screen, self).__init__(**kwargs)
+
+
 
 
     def capture(self):
