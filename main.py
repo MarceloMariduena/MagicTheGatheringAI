@@ -93,6 +93,7 @@ class offlineScreen(Screen):
         self.popupUi.open()
 
     def offRun(self):
+        self.modifier = typeManager()
         loader = loadPop()
         loadingScreen = Popup(title="Modeling",content=loader,size_hint=(None,None),size=(400,400))
         loadingScreen.open()
@@ -144,7 +145,8 @@ class offlineScreen(Screen):
 
         }
 
-        
+    def untiRun(self):
+        self.modifier.generate()
 
 
 
@@ -160,15 +162,14 @@ class cardScreen(Screen):
 
 
 
-class typeManager(Screen):
+class typeManager():
 
-    def __init__(self,**kwargs):
-        super(Screen,self).__init()
-        resScreen = ObjectProperty(None)
-        offScreen = ObjectProperty(None)
+    def __init__(self):
+        self.offScreen = App.get_running_app().root.get_screen("offline")
+
 
     def generate(self):
-        self.offScreen.offRun()
+        self.resScreen = App.get_running_app().root.get_screen("card")
 
         self.resScreen.descLabel.text = self.offScreen.ui.cardDesc.text
         self.resScreen.nameLabel.text = self.offScreen.ui.cardName.text

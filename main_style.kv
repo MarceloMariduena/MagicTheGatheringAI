@@ -2,7 +2,7 @@ WindowManager:
     MainWindow:
     offlineScreen:
     onlineScreen:
-    cardScreen:
+    cardScreen
 
 
 
@@ -167,17 +167,12 @@ WindowManager:
 
 
 
-<typeManager>:
-    name:"typeMan"
-    typeMan:typeMan
-    id:typeMan
-    offScreen:offScreen
-    resScreen:resScreen
+
 
 
 
 <offlineScreen>:
-    typeMan:typeMan
+
     id:offScreen
     name:"offline"
     offSubmit:offSubmit
@@ -219,8 +214,10 @@ WindowManager:
             size_hint:.2,.2
             pos_hint:{"x":.4,"top":.2}
             on_release:
-                if offSubmit.text == "Submit and Run": app.typeMan.generate()
-                else: app.root.current = "card"
+                if offSubmit.text == "Submit and Run": \
+                root.offRun();\
+                app.root.current = "card";\
+                root.untiRun();
 
 
 <cardScreen>:
@@ -251,14 +248,18 @@ WindowManager:
             size_hint:.12,.78
             color: 1,0,1,1
             text:"type"
+            text_size : self.size
+            halign:"left"
 
         Label:
             id:nameLabel
-            pos_hint:{"x":.31,"y":.498}
+            text_size : self.size
+            pos_hint:{"x":.348,"y":.121}
             size_hint:.12,.78
             color: 1,0,1,1
             text:"name"
-
+            halign:"left"
+            valign:"top"
         Label:
             id:descLabel
             pos_hint:{"x":.36,"y":-.065}
