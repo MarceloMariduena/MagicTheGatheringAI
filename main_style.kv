@@ -241,6 +241,7 @@ WindowManager:
     descLabel:descLabel
     typeLabel:typeLabel
     statLabel:statLabel
+    manaLabel:manaLabel
     FloatLayout:
 
 
@@ -268,6 +269,16 @@ WindowManager:
             pos_hint:{"x":.12,"top":1.48}
 
 
+        Label:
+            id:manaLabel
+            text_size:self.size
+            pos_hint:{"x":.6,"y":.121}
+            size_hint:.16,.78
+            color: 0,0,0,1
+            text:"mana"
+            halign:"left"
+            valign:"top"
+
 
         Label:
             id:typeLabel
@@ -284,7 +295,7 @@ WindowManager:
             id:nameLabel
             text_size : self.size
             pos_hint:{"x":.348,"y":.121}
-            size_hint:.12,.78
+            size_hint:.16,.78
             color: 0,0,0,1
             text:"name"
             halign:"left"

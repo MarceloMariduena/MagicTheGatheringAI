@@ -169,7 +169,7 @@ class cardScreen(Screen):
         nameLabel = ObjectProperty(None)
         typeLabel = ObjectProperty(None)
         statLabel = ObjectProperty(None)
-
+        manaLabel = ObjectProperty(None)
 
 class typeManager():
 
@@ -184,7 +184,7 @@ class typeManager():
         self.resScreen.nameLabel.text = self.offScreen.ui.cardName.text
         self.resScreen.typeLabel.text = self.offScreen.solution[0]
         self.resScreen.statLabel.text = self.offScreen.solution[1] + " / " + self.offScreen.solution[2]
-
+        self.resScreen.manaLabel.text = self.offScreen.solution[3]
 
 
 
