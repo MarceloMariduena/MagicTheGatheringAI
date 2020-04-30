@@ -1,0 +1,22 @@
+Installation Instructions
+
+
+step 1) 
+
+This must be run on a linux instance because of gstreamer
+the code was developed on a Ubuntu instance with the latest distribution
+
+
+step 2)
+
+create a fresh conda instance using anaconda navigator
+and install the required packages, and then to install
+
+kivy, and gstreamer use the following commands : 
+
+	conda install kivy -c conda-forge
+
+	conda install -c anaconda gstreamer, gst-plugins-base
+
+ 
+
